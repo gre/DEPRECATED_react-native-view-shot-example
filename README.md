@@ -4,10 +4,10 @@ Example for [react-native-view-shot](https://github.com/gre/react-native-view-sh
 
 ## recursive
 
-![](docs/recursive.gif)
+<img src="docs/recursive.gif" width=300 />
 
 > note: **recursive snapshot only works on iOS** (but why?)
 
 ## Android support
 
-![](docs/android.png)
+<img src="docs/android.png" width=300 />
