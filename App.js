@@ -24,20 +24,29 @@ export default class App extends Component {
   state = {
     previewSource: catsSource,
     error: null,
+    res: null,
     value: {
       format: "png",
       quality: 0.9,
+      result: "file",
     },
   };
 
   snapshot = refname => () =>
     takeSnapshot(this.refs[refname], this.state.value)
-    .then(uri => this.setState({ error: null, previewSource: { uri } }))
-    .catch(error => this.setState({ error, previewSource: null }));
+    .then(res => this.setState({
+      error: null,
+      res,
+      previewSource: { uri:
+        this.state.value.result === "base64"
+        ? "data:image/"+this.state.value.format+";base64,"+res
+        : res }
+    }))
+    .catch(error => this.setState({ error, res: null, previewSource: null }));
 
   render() {
-    const { value, previewSource, error } = this.state;
-    const { format, quality, width, height } = value;
+    const { value, previewSource, error, res } = this.state;
+    const { format, quality, width, height, result } = value;
     return (
       <ScrollView
         ref="full"
@@ -71,6 +80,9 @@ export default class App extends Component {
                   source={previewSource}
                 /> }
           </View>
+          <Text numberOfLines={1} style={styles.previewUriText}>
+          {res ? res.slice(0, 200) : ""}
+          </Text>
         </View>
         <View
           ref="form"
@@ -90,6 +102,7 @@ export default class App extends Component {
               <Picker.Item label="PNG" value="png" />
               <Picker.Item label="JPEG" value="jpeg" />
               <Picker.Item label="WEBM (android only)" value="webm" />
+              <Picker.Item label="INVALID" value="_invalid_" />
             </Picker>
           </View>
           <View style={styles.field}>
@@ -131,6 +144,18 @@ export default class App extends Component {
                 value: { ...value, height: parseInt(txt, 10) }
               })}
             /> : <Text style={styles.inputText}>(auto)</Text> }
+          </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>Result</Text>
+            <Picker
+              style={styles.input}
+              selectedValue={result}
+              onValueChange={result => this.setState({ value: { ...value, result } })}>
+              <Picker.Item label="file" value="file" />
+              <Picker.Item label="base64" value="base64" />
+              <Picker.Item label="data URI" value="data-uri" />
+              <Picker.Item label="INVALID" value="_invalid_" />
+            </Picker>
           </View>
         </View>
       </ScrollView>
@@ -198,6 +223,14 @@ const styles = StyleSheet.create({
   previewImage: {
     width: 375,
     height: 300,
+  },
+  previewUriText: {
+    fontSize: 12,
+    fontStyle: "italic",
+    color: "#666",
+    textAlign: "center",
+    padding: 10,
+    paddingBottom: 0,
   },
   previewError: {
     width: 375,
