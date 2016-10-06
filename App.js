@@ -34,6 +34,15 @@ export default class App extends Component {
 
   snapshot = refname => () =>
     takeSnapshot(this.refs[refname], this.state.value)
+    .then(res =>
+      this.state.value.result !== "file"
+      ? res
+      : new Promise((success, failure) =>
+      // just a test to ensure res can be used in Image.getSize
+      Image.getSize(
+        res,
+        (width, height) => (console.log(res,width,height), success(res)),
+        failure)))
     .then(res => this.setState({
       error: null,
       res,
