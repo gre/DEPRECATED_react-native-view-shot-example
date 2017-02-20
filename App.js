@@ -51,7 +51,7 @@ export default class App extends Component {
         ? "data:image/"+this.state.value.format+";base64,"+res
         : res }
     }))
-    .catch(error => this.setState({ error, res: null, previewSource: null }));
+    .catch(error => (console.warn(error), this.setState({ error, res: null, previewSource: null })));
 
   render() {
     const { value, previewSource, error, res } = this.state;
