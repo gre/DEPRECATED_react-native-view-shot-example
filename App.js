@@ -9,16 +9,38 @@ import {
   TextInput,
   Picker,
   Slider,
-
+  WebView,
 } from "react-native";
 import omit from "lodash/omit";
 import { takeSnapshot } from "react-native-view-shot";
-
+import { Surface } from "gl-react-native";
+import GL from "gl-react";
+import MapView from "react-native-maps";
 import Btn from "./Btn";
 
 const catsSource = {
   uri: "https://i.imgur.com/5EOyTDQ.jpg",
 };
+
+const shaders = GL.Shaders.create({
+  helloGL: {
+    frag: `
+precision highp float;
+varying vec2 uv;
+uniform float blue;
+void main () {
+  gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
+}`
+  }
+});
+
+const HelloGL = GL.createComponent(
+  ({ blue }) =>
+  <GL.Node
+    shader={shaders.helloGL}
+    uniforms={{ blue }}
+  />,
+  { displayName: "HelloGL" });
 
 export default class App extends Component {
   state = {
@@ -29,6 +51,7 @@ export default class App extends Component {
       format: "png",
       quality: 0.9,
       result: "file",
+      snapshotContentContainer: false,
     },
   };
 
@@ -55,7 +78,7 @@ export default class App extends Component {
 
   render() {
     const { value, previewSource, error, res } = this.state;
-    const { format, quality, width, height, result } = value;
+    const { format, quality, width, height, result, snapshotContentContainer } = value;
     return (
       <ScrollView
         ref="full"
@@ -98,9 +121,10 @@ export default class App extends Component {
           style={styles.form}>
           <View style={styles.btns}>
             <Btn label="Reset" onPress={() => this.setState({ previewSource: catsSource })} />
-            <Btn label="Snap Head" onPress={this.snapshot("header")} />
-            <Btn label="Snap Form" onPress={this.snapshot("form")} />
-            <Btn label="Snap Root" onPress={this.snapshot("full")} />
+            <Btn label="📷 Head" onPress={this.snapshot("header")} />
+            <Btn label="📷 Form" onPress={this.snapshot("form")} />
+            <Btn label="📷 Exp." onPress={this.snapshot("complex")} />
+            <Btn label="📷 Root" onPress={this.snapshot("full")} />
           </View>
           <View style={styles.field}>
             <Text style={styles.label}>Format</Text>
@@ -166,6 +190,37 @@ export default class App extends Component {
               <Picker.Item label="INVALID" value="_invalid_" />
             </Picker>
           </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>snapshotContentContainer</Text>
+            <Switch
+              style={styles.switch}
+              value={snapshotContentContainer}
+              onValueChange={snapshotContentContainer => this.setState({
+                value: { ...value, snapshotContentContainer }
+              })}
+            />
+          </View>
+        </View>
+        <View style={styles.experimental} ref="complex" collapsable={false}>
+          <Text style={styles.experimentalTitle}>Experimental Stuff</Text>
+          <Surface width={300} height={300}>
+            <HelloGL blue={0.5} />
+          </Surface>
+          <MapView
+            initialRegion={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            style={{ width: 300, height: 300 }}
+          />
+          <WebView
+            style={{ width: 300, height: 300 }}
+            source={{
+              uri: "https://github.com/gre/react-native-view-shot"
+            }}
+          />
         </View>
       </ScrollView>
     );
@@ -184,6 +239,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     textAlign: "center",
+    margin: 10,
+  },
+  experimental: {
+    padding: 10,
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  experimentalTitle: {
+    fontSize: 16,
     margin: 10,
   },
   p1: {

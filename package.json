@@ -6,9 +6,12 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "gl-react": "^2.2.9",
+    "gl-react-native": "^2.42.1",
     "lodash": "4.17.4",
     "react": "15.4.2",
     "react-native": "0.41.2",
+    "react-native-maps": "https://github.com/airbnb/react-native-maps/archive/v0.13.0.tar.gz",
     "react-native-view-shot": "*"
   }
 }
