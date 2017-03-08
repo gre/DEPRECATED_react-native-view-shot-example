@@ -16,6 +16,7 @@ import { takeSnapshot } from "react-native-view-shot";
 import { Surface } from "gl-react-native";
 import GL from "gl-react";
 import MapView from "react-native-maps";
+import Video from "react-native-video";
 import Btn from "./Btn";
 
 const catsSource = {
@@ -220,6 +221,12 @@ export default class App extends Component {
             source={{
               uri: "https://github.com/gre/react-native-view-shot"
             }}
+          />
+          <Video
+            style={{ width: 300, height: 300 }}
+            source={require("./broadchurch.mp4")}
+            volume={0}
+            repeat
           />
         </View>
       </ScrollView>

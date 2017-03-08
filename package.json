@@ -12,6 +12,7 @@
     "react": "15.4.2",
     "react-native": "0.41.2",
     "react-native-maps": "https://github.com/airbnb/react-native-maps/archive/v0.13.0.tar.gz",
+    "react-native-video": "^1.0.0",
     "react-native-view-shot": "*"
   }
 }
