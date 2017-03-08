@@ -108,6 +108,7 @@ export default class App extends Component {
                   {""+(error.message || error)}
                 </Text>
               : <Image
+                  fadeDuration={0}
                   resizeMode="contain"
                   style={styles.previewImage}
                   source={previewSource}
