@@ -224,13 +224,16 @@ export default class App extends Component {
             }}
             style={{ width: 300, height: 300 }}
           />
-          <WebView
-             ref="webview"
-            style={{ width: 300, height: 300 }}
-            source={{
-              uri: "https://github.com/gre/react-native-view-shot"
-            }}
-          />
+          <View
+            ref="webview"
+            collapsable={false}
+            style={{ width: 300, height: 300 }}>
+            <WebView
+              source={{
+                uri: "https://github.com/gre/react-native-view-shot"
+              }}
+            />
+          </View>
           <Video
             ref="video"
             style={{ width: 300, height: 300 }}
