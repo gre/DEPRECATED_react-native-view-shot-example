@@ -122,11 +122,16 @@ export default class App extends Component {
           ref="form"
           style={styles.form}>
           <View style={styles.btns}>
-            <Btn label="Reset" onPress={() => this.setState({ previewSource: catsSource })} />
-            <Btn label="📷 Head" onPress={this.snapshot("header")} />
+            <Btn label="😻 Reset" onPress={() => this.setState({ previewSource: catsSource })} />
+            <Btn label="📷 Head Section" onPress={this.snapshot("header")} />
             <Btn label="📷 Form" onPress={this.snapshot("form")} />
-            <Btn label="📷 Exp." onPress={this.snapshot("complex")} />
-            <Btn label="📷 Root" onPress={this.snapshot("full")} />
+            <Btn label="📷 Experimental Section" onPress={this.snapshot("complex")} />
+            <Btn label="📷 All (ScrollView)" onPress={this.snapshot("full")} />
+            <Btn label="📷 GL React" onPress={this.snapshot("gl")} />
+            <Btn label="📷 MapView" onPress={this.snapshot("mapview")} />
+            <Btn label="📷 WebView" onPress={this.snapshot("webview")} />
+            <Btn label="📷 Video" onPress={this.snapshot("video")} />
+            <Btn label="📷 Empty View (should crash)" onPress={this.snapshot("empty")} />
           </View>
           <View style={styles.field}>
             <Text style={styles.label}>Format</Text>
@@ -203,12 +208,14 @@ export default class App extends Component {
             />
           </View>
         </View>
+        <View ref="empty" collapsable={false} />
         <View style={styles.experimental} ref="complex" collapsable={false}>
           <Text style={styles.experimentalTitle}>Experimental Stuff</Text>
-          <Surface width={300} height={300}>
+          <Surface ref="gl" width={300} height={300}>
             <HelloGL blue={0.5} />
           </Surface>
           <MapView
+             ref="mapview"
             initialRegion={{
               latitude: 37.78825,
               longitude: -122.4324,
@@ -218,12 +225,14 @@ export default class App extends Component {
             style={{ width: 300, height: 300 }}
           />
           <WebView
+             ref="webview"
             style={{ width: 300, height: 300 }}
             source={{
               uri: "https://github.com/gre/react-native-view-shot"
             }}
           />
           <Video
+            ref="video"
             style={{ width: 300, height: 300 }}
             source={require("./broadchurch.mp4")}
             volume={0}
@@ -334,8 +343,10 @@ const styles = StyleSheet.create({
   },
   btns: {
     flexDirection: "row",
+    flexWrap: "wrap",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
     paddingVertical: 10,
+    margin: 4,
   }
 });
