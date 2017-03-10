@@ -3,6 +3,7 @@ using ReactNative.Modules.Core;
 using ReactNative.Shell;
 using RNViewShot;
 using System.Collections.Generic;
+using ReactNativeVideo;
 
 namespace ViewShotExample
 {
@@ -34,6 +35,7 @@ namespace ViewShotExample
                 {
                     new MainReactPackage(),
                     new RNViewShotPackage(),
+                    new ReactVideoPackage(),
                 };
             }
         }

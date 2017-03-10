@@ -13,9 +13,9 @@ import {
 } from "react-native";
 import omit from "lodash/omit";
 import { takeSnapshot } from "react-native-view-shot";
-import { Surface } from "gl-react-native";
-import GL from "gl-react";
-import MapView from "react-native-maps";
+// import { Surface } from "gl-react-native";
+// import GL from "gl-react";
+// import MapView from "react-native-maps";
 import Video from "react-native-video";
 import Btn from "./Btn";
 
@@ -23,7 +23,7 @@ const catsSource = {
   uri: "https://i.imgur.com/5EOyTDQ.jpg",
 };
 
-const shaders = GL.Shaders.create({
+/*const shaders = GL.Shaders.create({
   helloGL: {
     frag: `
 precision highp float;
@@ -41,7 +41,7 @@ const HelloGL = GL.createComponent(
     shader={shaders.helloGL}
     uniforms={{ blue }}
   />,
-  { displayName: "HelloGL" });
+  { displayName: "HelloGL" });*/
 
 export default class App extends Component {
   state = {
@@ -211,7 +211,7 @@ export default class App extends Component {
         <View ref="empty" collapsable={false} />
         <View style={styles.experimental} ref="complex" collapsable={false}>
           <Text style={styles.experimentalTitle}>Experimental Stuff</Text>
-          <Surface ref="gl" width={300} height={300}>
+          {/*<Surface ref="gl" width={300} height={300}>
             <HelloGL blue={0.5} />
           </Surface>
           <MapView
@@ -223,7 +223,7 @@ export default class App extends Component {
               longitudeDelta: 0.0421,
             }}
             style={{ width: 300, height: 300 }}
-          />
+          />*/}
           <View
             ref="webview"
             collapsable={false}

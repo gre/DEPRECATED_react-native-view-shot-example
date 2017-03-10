@@ -202,6 +202,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\node_modules\react-native-video\windows\ReactNativeVideo\ReactNativeVideo.csproj">
+      <Project>{e8f5f57f-757e-4237-ad23-f7a8755427cd}</Project>
+      <Name>ReactNativeVideo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\node_modules\react-native-view-shot\windows\RNViewShot\RNViewShot.csproj">
       <Project>{391A35D0-FEBA-11E6-9171-BD5177E581B7}</Project>
       <Name>RNViewShot</Name>

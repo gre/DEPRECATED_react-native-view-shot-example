@@ -5,6 +5,7 @@ using ReactNative.Shell;
 using ReactNative.UIManager;
 using System;
 using System.Collections.Generic;
+using ReactNativeVideo;
 using RNViewShot;
 
 namespace ViewShotExample.Net46
@@ -17,6 +18,7 @@ namespace ViewShotExample.Net46
         {
             new MainReactPackage(),
             new RNViewShotPackage(),
+            new ReactVideoPackage(),
         };
 
         public override bool UseDeveloperSupport
