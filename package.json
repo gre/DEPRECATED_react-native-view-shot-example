@@ -9,6 +9,10 @@
     "lodash": "4.17.4",
     "react": "15.4.2",
     "react-native": "0.41.2",
-    "react-native-view-shot": "*"
+    "react-native-view-shot": "*",
+    "react-native-windows": "^0.43.0-rc.0"
+  },
+  "devDependencies": {
+    "rnpm-plugin-windows": "^0.2.4"
   }
 }
