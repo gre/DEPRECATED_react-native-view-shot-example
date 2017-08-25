@@ -3,20 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
   },
   "dependencies": {
-    "gl-react": "^2.2.9",
-    "gl-react-native": "^2.42.1",
+    "gl-react": "^2.2.10",
+    "gl-react-native": "^2.47.0",
     "lodash": "4.17.4",
-    "react": "15.4.2",
-    "react-native": "0.41.2",
-    "react-native-windows": "^0.43.0-rc.0"
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.47.0",
+    "react-native-windows": "^0.47.0-rc.4",
+    "react-native-view-shot": "*",
+    "react-native-maps": "^0.16.2",
+    "react-native-video": "^2.0.0"
   },
   "devDependencies": {
-    "rnpm-plugin-windows": "^0.2.4",
-    "react-native-maps": "https://github.com/airbnb/react-native-maps/archive/v0.13.0.tar.gz",
-    "react-native-video": "^1.0.0",
-    "react-native-view-shot": "*"
+    "rnpm-plugin-windows": "^0.2.4"
   }
 }
